@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tool id="ghcr_hello_test" name="GHCR Hello Test" version="0.1.0">
+    <description>Validate GHCR container connectivity from Galaxy</description>
+    <requirements>
+        <container type="docker">ghcr.io/<org-or-user>/<repo-name>:latest</container>
+    </requirements>
+    <command detect_errors="exit_code"><![CDATA[
+/hello.sh > '$output'
+    ]]></command>
+    <inputs />
+    <outputs>
+        <data name="output" format="txt" label="ghcr-hello.txt" />
+    </outputs>
+    <tests>
+        <test>
+            <output name="output">
+                <assert_contents>
+                    <has_text text="Hello from GHCR" />
+                </assert_contents>
+            </output>
+        </test>
+    </tests>
+</tool>
